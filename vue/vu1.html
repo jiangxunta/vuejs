@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0" />
+<title>html5+css3响应式游戏排行效果</title>
+<!-- <link rel="stylesheet" href="css/normalize3.0.2.min.css" /> -->
+<style type="text/css">
+	ul,li,body,p,div{margin: 0px; padding: 0px;}
+	.all-app{padding: 10px;}
+	[v-cloak] {
+	  display: none;
+	}
+	ul{list-style: none;}
+</style>
+</head>
+<body>
+	<div v-cloak id="app" class="all-app">
+		<p>{{message}}</p>
+		<!-- <input v-model="message"> -->
+		<input v-model="firstName">
+		<input v-model="newTodo" v-on:keyup.enter="addTodo">
+		<ul>
+			<li v-for="todo in todos">
+				<span>{{todo.text}}</span>
+				<button v-on:click="removeTodo($index)">X</button>
+			</li>
+		</ul>
+		<button v-on:click="releaseMessage">releaseMessage</button>
+		<p v-if="greeting">Hello!</p>
+		<div>{{fullName}}</div>
+	</div>
+	
+	<script src="vue.js"></script>
+	<script type="text/javascript">
+		var vm = new Vue({
+			el: '#app',
+			data: {
+				message:'hello word!',
+				todos:[{text:'测试1'},{text:'测试2'},{text:'测试3'}],
+				newTodo: '',
+				greeting:true,
+				firstName:'Foo',
+				lastName:'Bar',
+				fullName:'FooBar'
+			},
+			methods:{
+				releaseMessage:function(){
+					this.message = this.message.split('').reverse().join('');
+				},
+				addTodo:function(){
+					var txt=this.newTodo.trim();
+					if(txt){
+						this.todos.push({text:txt});
+						this.newTodo="";
+					}
+				},
+				removeTodo:function(index){
+					this.todos.splice(index,1);
+				}
+			}
+		});
+
+		
+		vm.$watch('firstName',function(val){
+			this.fullName = val + ' ' + this.lastName;
+		});
+		vm.$watch('lastName',function(val){
+			this.fullName = this.firstName+' '+ val;
+		});
+	</script>
+</body>
+</html>
