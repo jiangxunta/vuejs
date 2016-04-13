@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0" />
+<title>html5+css3响应式游戏排行效果</title>
+<!-- <link rel="stylesheet" href="css/normalize3.0.2.min.css" /> -->
+<style type="text/css">
+	ul,li,body,p,div{margin: 0px; padding: 0px;}
+	.all-app{padding: 10px;}
+</style>
+</head>
+<body>
+	<!-- 修改数据  vm.someData = 'new value' -->
+	<!-- Vue.nextTick(callback) 结合使用 -->
+	<div id="example">
+	  	<my-component></my-component>
+	</div>
+	<b id="qq" msg="hello"></b>
+	<script src="vue.js"></script>
+	<script type="text/javascript">
+		var MyComponent = Vue.extend({
+			template: '<div>A custom component!</div>'
+		});
+		Vue.component('my-component', MyComponent);
+		new Vue({
+		  	el: '#example'
+		})
+	</script>
+</body>
+</html>
